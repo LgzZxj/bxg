@@ -18,11 +18,14 @@
     //3. 获取到文件夹名称以及文件名之后，要将文件拿到，返回给浏览器
 
     if(file_exists("views/".$path.".html")){
-        include "views/".$path.".html";
+        include $_SERVER["DOCUMENT_ROOT"]."/views/".$path.".html";
     }else{
         header("HTTP/1.1 404 NotFound");
         echo "404";
     }
 
-    
+    //$_SERVER["DOCUMENT_ROOT"] 这个指的就是网站跟目的绝对路径
+
+    // include $_SERVER["DOCUMENT_ROOT"]."/views/dashboard/index.html"
+    // var_dump($_SERVER);
 ?>

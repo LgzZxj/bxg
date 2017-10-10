@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
-    <?php include "/views/public/css.html"?>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/views/public/css.html"?>
 </head>
 <body>
     
     <!-- 侧边栏 -->
-    <?php include "/views/public/aside.html"?>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/views/public/aside.html"?>
     <!-- 主体 -->
     <div class="main">
+
         <div class="container-fluid">
             <!-- 头部 -->
-            <?php include "/views/public/header.html"?>
+            <?php include $_SERVER['DOCUMENT_ROOT']."/views/public/header.html"?>
             <!-- 个人资料 -->
             <div class="body teacher-profile">
                 <div class="profile">
@@ -54,6 +55,6 @@
             </div>
         </div>
     </div>
-    <?php include "/views/public/js.html"?>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/views/public/js.html"?>
 </body>
 </html>
