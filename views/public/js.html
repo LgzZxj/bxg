@@ -1,6 +1,6 @@
-<script src="/views/assets/jquery/jquery.min.js"></script>
-<script src="/views/assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="/views/assets/jquery-cookie/jquery.cookie.js"></script>
-<script src="/views/assets/artTemplate/template.js"></script>
-
-<script src="/views/static/js/common.js"></script>
+<script src="/views/static/lib/require.js"></script>
+<script src="/views/static/lib/config.js"></script>
+<script>
+    //baseUrl: /views/assets
+    require(["../static/js/common"])
+</script>
