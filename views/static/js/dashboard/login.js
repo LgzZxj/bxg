@@ -1,4 +1,4 @@
-define(["jquery", "cookie"], function ($) {
+define(["jquery", "cookie", "form"], function ($) {
     
     $(function () {
         //1. 获取登录按钮，并注册点击事件(因为页面结构没有获取按钮的合适的选择器，我 们不用了)
@@ -16,14 +16,13 @@ define(["jquery", "cookie"], function ($) {
                 return false;
             }
 
-            //1. 获取用户的输入
-            var data = $(this).serialize();
+            // //1. 获取用户的输入
+            // var data = $(this).serialize();
 
             //2. 将用户输入的内容发送给接口api进行登录
-            $.ajax({
+            $(this).ajaxSubmit({
                 url: "/api/login",
                 type: "post",
-                data: data,
                 success: function (data) {
                     if (data.code == 200) {
                         //先将后台返回的用户的用户名以及头像信息存储到cookie中
