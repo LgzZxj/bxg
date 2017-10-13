@@ -1,4 +1,4 @@
-define(["utils", "jquery", "template", "form"], function(utils, $, template){
+define(["utils", "jquery", "template", "form", "datepicker", "datepickerCN"], function(utils, $, template){
 
     //一个页面中，要实现两个功能： 添加  编辑
 
@@ -46,6 +46,14 @@ define(["utils", "jquery", "template", "form"], function(utils, $, template){
     function renderData(){
         var html = template("manage-tpl", data);
         $(".body.teacher").html(html);
+
+
+        //使用日期选择插件
+        $("input[name='tc_join_date']").datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            language: "zh-CN"
+        })
     }
    
 
