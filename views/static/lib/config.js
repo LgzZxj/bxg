@@ -4,6 +4,12 @@ require.config({
         "jquery": "jquery/jquery",
         "cookie": "jquery-cookie/jquery.cookie",
         "template": "artTemplate/template-web",
-        "form": "jquery-form/jquery.form"
+        "form": "jquery-form/jquery.form",
+        "bootstrap": "bootstrap/js/bootstrap"
+    },
+    shim: {
+        "bootstrap": {
+            deps: ["jquery"]
+        }
     }
 })

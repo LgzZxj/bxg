@@ -1,4 +1,4 @@
-define(["jquery", "template"], function($, template){
+define(["jquery", "template", "bootstrap"], function($, template){
 
     
     
@@ -24,7 +24,7 @@ define(["jquery", "template"], function($, template){
             if(data.code == 200){
                 //将请求回来的讲师列表数据，通过模板引擎，渲染到页面中
 
-                console.log(data.result);
+                // console.log(data.result);
                 // data.result.forEach(function(v, i){
                 //     v.age =  new Date().getFullYear() - new Date(v.tc_birthday).getFullYear();
                 // })
@@ -33,6 +33,30 @@ define(["jquery", "template"], function($, template){
                 $("#teacher-list").html(html);
             }
         }
+    })
+
+    //给所有的查看按钮注册点击事件 (委托)
+    $("#teacher-list").on("click", ".btn-checkinfo", function(){
+
+        //1. 从后台获取当前行讲师的信息
+        // 先要获取当前行讲师的 tc_id
+        var id = $(this).parent().data("id")
+        $.ajax({
+            url: "/api/teacher/view",
+            data: {tc_id: id},
+            success: function(data){
+                //将获取到信息渲染到模态框中
+                if(data.code == 200){
+                    console.log(data);
+                    
+                    var html = template("teacher-info-tpl", data.result);
+                    $("#teacher-info").html(html);
+
+                    //2. 打开模态框
+                    $("#teacherModal").modal("show");
+                }
+            }
+        })
     })
 })
 
