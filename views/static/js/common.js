@@ -40,5 +40,25 @@ define(["jquery", "template", "cookie"], function($, template){
 				}
 			})
 		})
+
+		//给导航栏菜单注册事件，实现点击父菜单展示子菜单
+		$(".navs>ul>li>ul").parent().click(function(){
+			//让子菜单切换显示
+			$(this).children("ul").slideToggle("fast");
+		})
+
+		//让当前页面对应的导航栏中的a标签加上active类样式
+		var activeA = $(".navs a[href='" + location.pathname + "']")
+		activeA.addClass("active");
+
+		//因为只有是子菜单的ul才会有一个兄弟元素a
+		//就判断当前a标签所在的菜单是否有兄弟元素a
+		//如果有，就证明当前a标签是在一个子菜单中
+		//那么直接让子菜单显示即可
+		if(activeA.parent().parent().siblings("a").length > 0){
+			activeA.parent().parent().show();
+		}
+
+
 	})
 })
