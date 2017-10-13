@@ -1,7 +1,4 @@
 define(["jquery", "template", "bootstrap"], function($, template){
-
-    
-    
     //注册过滤器
     //语法： template.defaults.imports.自定义的过滤器名称 = function(value){
             //value接收到的就是 | 前面的要被过滤的数据
