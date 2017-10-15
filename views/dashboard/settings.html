@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">个人介绍</label>
                             <div class="col-xs-5 ckeditor">
-                                <textarea name="" rows="15" class="form-control input-sm"></textarea>
+                                <textarea name="tc_introduce" rows="15" class="form-control input-sm"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -113,5 +113,8 @@
     </div>
 
     <?php include "/views/public/js.html"?>
+    <script>
+        require(["../static/js/dashboard/settings"])
+    </script>
 </body>
 </html>
