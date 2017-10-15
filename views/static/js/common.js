@@ -1,5 +1,13 @@
-define(["jquery", "template", "cookie"], function($, template){
+define(["jquery", "template", "nprogress", "cookie"], function($, template, NProgress){
+
+	//页面刚一进来就显示进度条
+	NProgress.start();
+
 	$(function(){
+
+		
+		//当页面文档结构加载完成之后，调用done结束进度条的显示
+		NProgress.done();
 
 		//如果不是在登录页面，才需要从cookie中获取用户数据然后展示在页面
 		if(location.pathname != "/dashboard/login"){
@@ -60,5 +68,18 @@ define(["jquery", "template", "cookie"], function($, template){
 		}
 
 
+		//注册ajax全局事件，在全局事件中开启和结束进度条
+
+		$(document).ajaxStart(function(){
+			NProgress.start();
+			$("#mask").show();
+		}).ajaxStop(function(){
+			NProgress.done();
+			$("#mask").hide();
+		})
+
+
 	})
+
 })
+

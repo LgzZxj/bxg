@@ -1,4 +1,4 @@
-define(["utils", "jquery", "template", "form", "datepicker", "datepickerCN"], function(utils, $, template){
+define(["utils", "jquery", "template", "form", "datepicker", "datepickerCN", "validate"], function(utils, $, template){
 
     //一个页面中，要实现两个功能： 添加  编辑
 
@@ -33,7 +33,9 @@ define(["utils", "jquery", "template", "form", "datepicker", "datepickerCN"], fu
         data.title = "讲师添加";
         data.buttonText = "添 加";
         data.url = "/api/teacher/add";
-        data.teacher = {};
+        data.teacher = {
+            tc_gender: "0"
+        };
         renderData();
     }
 
@@ -54,17 +56,62 @@ define(["utils", "jquery", "template", "form", "datepicker", "datepickerCN"], fu
             autoclose: true,
             language: "zh-CN"
         })
+
+        //使用表单验证插件，为表单注册验证功能
+        $("form").validate({
+            onBlur: true,
+            onChange: true,
+            sendForm: false,
+            conditional: {
+                forbidden: function(value){
+                    return value != "前端学院";
+                }
+            },
+            description: {
+                name: {
+                    required: "用户名不能为空",
+                    conditional: "不能使用前端学院",
+                },
+                pass: {
+                    required: "密码不能为空",
+                    pattern: "密码必须为6-15位的字母或数字"
+                    // /((?=.\d)(?=.\D)|(?=.[a-zA-Z])(?=.[^a-zA-Z]))^.{8,16}$/
+                },
+                joindate: {
+                    required: "入职日期不能为空"
+                }
+            },
+            valid: function(){
+                //在表单通过验证的时候会调用
+                //我们要在表单验证通过的时候发送ajax请求提交表单
+
+                //this就是这个表单的jquery对象！
+                this.ajaxSubmit({
+                    success: function(data){
+                        if(data.code == 200){
+                            location.href = "/teacher/list"
+                        }
+                    }
+                })
+                // console.log("表单通过验证了");
+            },
+            eachValidField: function(){
+                //当表单项通过验证的时候调用
+                //让当前表单项变成绿色 也就是要给爷爷元素加上一个类样式 has-success
+                this.parent().parent().addClass("has-success").removeClass("has-error")
+            },
+            eachInvalidField: function(){
+                //当表单项不通过验证的时候调用 
+                //让当前表单项变成绿色 也就是要给爷爷元素加上一个类样式 has-error
+                this.parent().parent().addClass("has-error").removeClass("has-success")
+                
+            }
+        })
     }
    
 
-    $(".body.teacher").on("submit", "form", function(){
-        $(this).ajaxSubmit({
-            success: function(data){
-                if(data.code == 200){
-                    location.href = "/teacher/list"
-                }
-            }
-        })
-        return false;
-    })
+    // $(".body.teacher").on("submit", "form", function(){
+        
+    //     return false;
+    // })
 })

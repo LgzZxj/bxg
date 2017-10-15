@@ -1,4 +1,4 @@
-define(["jquery", "template", "bootstrap"], function($, template){
+define(["jquery", "template", "nprogress", "bootstrap"], function($, template, NProgress){
     //注册过滤器
     //语法： template.defaults.imports.自定义的过滤器名称 = function(value){
             //value接收到的就是 | 前面的要被过滤的数据
@@ -17,11 +17,14 @@ define(["jquery", "template", "bootstrap"], function($, template){
     //1. 向后台发送ajax请求，获取讲师列表的数据
     $.ajax({
         url: "/api/teacher",
+        // beforeSend: function(){
+        //     NProgress.start();
+        // },
         success: function(data) {
             if(data.code == 200){
                 //将请求回来的讲师列表数据，通过模板引擎，渲染到页面中
 
-                console.log(data.result);
+                // console.log(data.result);
                 // data.result.forEach(function(v, i){
                 //     v.age =  new Date().getFullYear() - new Date(v.tc_birthday).getFullYear();
                 // })
@@ -29,7 +32,10 @@ define(["jquery", "template", "bootstrap"], function($, template){
                 var html = template("teacher-list-tpl", data);
                 $("#teacher-list").html(html);
             }
-        }
+        },
+        // complete: function(){
+        //     NProgress.done();
+        // }
     })
 
     //给所有的查看按钮注册点击事件 (委托)
