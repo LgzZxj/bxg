@@ -70,6 +70,17 @@ define(["jquery", "ckeditor", "template", "uploadify", "datepicker", "datepicker
         }
 
         $(".settings").on("submit", "form", function(){
+
+            //如果遇到富文本编辑器编辑内容之后，无法保存的情况
+            //很可能是，富文本编辑器中的内容没有同步到我们的textarea中
+            //那就需要手动做一步，同步操作
+            
+            //CKEDITOR
+            // console.log(CKEDITOR.instances)
+            //下面的代码，就可以将富文本编辑器中的内容更新到textarea中！！
+            // CKEDITOR.instances.content.updateElement()
+
+
             $(this).ajaxSubmit({
                 url: "/api/teacher/modify",
                 type: "post",
