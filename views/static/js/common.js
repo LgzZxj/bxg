@@ -80,6 +80,5 @@ define(["jquery", "template", "nprogress", "cookie"], function($, template, NPro
 
 
 	})
-
 })
 
