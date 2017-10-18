@@ -13,7 +13,7 @@ define(["jquery", "form"], function($){
                         //所以进入下个页面之后，需要知道，要编辑的课程究竟是谁
                         //所以，我们需要将当前创建课程成功之后，后台返回给我们的id
                         //通过url连接，交给下一个基本信息编辑页面
-                        location.href = "/course/basic?id=" + data.result.cs_id;
+                        location.href = "/course/base?id=" + data.result.cs_id;
                     }
                 }
             })

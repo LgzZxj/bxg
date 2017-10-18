@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
     <?php include "/views/public/css.html"?>
+    <link rel="stylesheet" href="/views/assets/Jcrop/css/Jcrop.css">
 </head>
 
 <body>
@@ -51,19 +52,19 @@
             <!-- 步聚 -->
             <ul class="forwards list-unstyled">
                 <li>
-                    <a href="add_step1" class="done">
+                    <a href="/course/base?id={{cs_id}}" class="done">
                     <b class="fa fa-check"></b>
                     基本信息
                     </a>
                 </li>
                 <li>
-                    <a href="./add_step2" class="active">
+                    <a href="/course/cover?id={{cs_id}}" class="active">
                     <b>2</b>
                     课程图片
                     </a>
                 </li>
                 <li>
-                    <a href="add_step3">
+                    <a href="/course/lessons?id={{cs_id}}">
                     <b>3</b>
                     课时管理
                     </a>
@@ -83,6 +84,13 @@
                         {{else}}
                         <img src="/views/static/uploads/course.png" alt="">                        
                         {{/if}}
+
+                        <form>
+                            <input type="hidden" name="x">
+                            <input type="hidden" name="y">
+                            <input type="hidden" name="w">
+                            <input type="hidden" name="h">
+                        </form>
                     </div>
                     <p class="tips">
                         可上传jpg, gif, png格式文件, 图片建议尺寸大于300x150，文件大小不能超过2M。
@@ -91,7 +99,7 @@
                         <button id="upload-btn" class="btn btn-success btn-sm">选择图片</button>
                     </div>
                     <div class="col-xs-2">
-                        <button id="crop-btn" class="btn btn-warning btn-sm" {{cs_cover_original ? "" : "disabled"}}>裁切图片</button>
+                        <button id="crop-btn" data-type="crop" class="btn btn-warning btn-sm" {{cs_cover_original ? "" : "disabled"}}>裁切图片</button>
                     </div>
                 </div>
             </div>
